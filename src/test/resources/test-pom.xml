@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.nerdynick</groupId>
+	<artifactId>mustache-maven-plugin-test</artifactId>
+	<version>1.0.0</version>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.nerdynick</groupId>
+				<artifactId>jinja-maven-plugin</artifactId>
+				<configuration>
+					<project implementation="com.nerdynick.maven.plugins.jinja.MavenProjectStub"/>
+					<templates>
+						<param>
+                            <inputFile>src/test/resources/test.j2</inputFile>
+							<outputDir>target/test-harness</outputDir>
+							<outputExt>txt</outputExt>
+						</param>
+						<param>
+                            <inputDir>
+                                <directory>src/test/resources/templates</directory>
+                            </inputDir>
+							<outputDir>target/test-harness/scan</outputDir>
+							<outputExt>txt</outputExt>
+						</param>
+						<param>
+                            <inputDirs>
+                                <param>
+                                    <directory>src/test/resources/templates</directory>
+                                </param>
+                                <param>
+                                    <directory>src/test/resources/templates2</directory>
+                                </param>
+                            </inputDirs>
+							<outputDir>target/test-harness/scan/multi</outputDir>
+							<outputExt>txt</outputExt>
+						</param>
+						<param>
+                            <inputDir>
+                                <directory>src/test/resources/templates</directory>
+                                <includes>
+                                    <param>.+_2.+</param>
+                                </includes>
+                            </inputDir>
+							<outputDir>target/test-harness/scan/include</outputDir>
+							<outputExt>txt</outputExt>
+						</param>
+						<param>
+                            <inputDir>
+                                <directory>src/test/resources/templates</directory>
+                                <excludes>
+                                    <param>.+_2.+</param>
+                                </excludes>
+                            </inputDir>
+							<outputDir>target/test-harness/scan/exclude</outputDir>
+							<outputExt>txt</outputExt>
+						</param>
+					</templates>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
